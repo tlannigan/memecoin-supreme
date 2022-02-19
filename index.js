@@ -13,8 +13,9 @@ client.once('ready', () => {
     console.log('Memecoin Supreme has ascended.')
 })
 
-client.on('interactionCreate', async Interaction => {
-    if (!Interaction.isCommand()) return
+// Handle bot commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return
     
     const { commandName } = interaction;
 

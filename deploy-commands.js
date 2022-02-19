@@ -5,9 +5,9 @@
 require('dotenv').config()
 const { BOT_TOKEN, GUILD_ID, CLIENT_ID } = process.env
 
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { REST } from '@discordjs/rest'
-import { Routes } from 'discord-api-types/v9'
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 
 const commands = [
     new SlashCommandBuilder().setName('ping').setDescription('Confirm that bot is working.'),
