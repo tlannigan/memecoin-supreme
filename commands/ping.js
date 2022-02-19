@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Alive and well :)'),
+        .setDescription('Check bot status.'),
     async execute(interaction) {
         await interaction.reply('Alive and well :)');
     },
