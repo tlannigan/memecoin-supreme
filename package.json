@@ -1,0 +1,16 @@
+{
+  "name": "memecoin-supreme",
+  "version": "0.0.1",
+  "description": "Discord crypto bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tlannigan",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.27.2",
+    "discord.js": "^13.6.0"
+  }
+}
