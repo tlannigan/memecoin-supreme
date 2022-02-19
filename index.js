@@ -1,12 +1,22 @@
+const fs = require('fs')
+const { Client, Collection, Intents } = require('discord.js')
+
 // Load .env variables
 require('dotenv').config()
 const token = process.env.BOT_TOKEN
 
-// Require the necessary discord.js classes
-const { Client, Intents, Interaction } = require('discord.js')
-
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
+
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`)
+    // Set a new item in the collection
+    // With the key as the command name and the value as the exported module
+    client.commands.set(command.data.name, command)
+}
 
 // On ready
 client.once('ready', () => {
