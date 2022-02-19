@@ -1,3 +1,4 @@
+// Called when application is ready to be used
 module.exports = {
 	name: 'ready',
 	once: true,

@@ -1,10 +1,10 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders')
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Check bot status.'),
+        .setDescription('Check if bot is responding.'),
     async execute(interaction) {
-        await interaction.reply('Alive and well :)');
+        await interaction.reply('Alive and well :)')
     },
-};
+}
