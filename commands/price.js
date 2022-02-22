@@ -1,21 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const axios = require('axios').default
-
-// Load .env variables
-require("dotenv").config()
-const token = process.env.ETH_TOKEN
+const etherscan = require('../api/etherscan')
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('price')
         .setDescription('Returns the price of ETH'),
     async execute(interaction) {
-        axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${token}`)
+        etherscan.getPrice()
             .then(res => {
-                interaction.reply(`ETH Price: $${res.data.result.ethusd}`)
-            })
-            .catch(error => {
-                console.error(error)
+                interaction.reply(`ETH price: $${res} CAD`)
             })
     },
 }
