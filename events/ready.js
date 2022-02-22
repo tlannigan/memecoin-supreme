@@ -1,26 +1,19 @@
-const axios = require('axios').default
-
-// Load .env variables
-require("dotenv").config()
-const token = process.env.ETH_TOKEN
-
-// Set status to ETH gas price
-async function setGasStatus(client) {
-	axios.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${token}`)
-		.then(res => {
-			client.user.setActivity(`Gas Price: ${res.data.result.ProposeGasPrice} gwei`, { type: 'WATCHING' })
-		})
-		.catch(error => {
-			console.error(error)
-		})
-}
+const etherscan = require('../api/etherscan')
 
 module.exports = {
 	name: 'ready',
 	once: true,
 	async execute(client) {
 		console.log(`${client.user.tag} has ascended.`)
-		setGasStatus(client)
-		setInterval(() => setGasStatus(client), 10000)
+
+		const gasPrice = () => etherscan.getGasPrice()
+
+		// Set activity status to current gas price
+		client.user.setActivity(`Gas Price: ${await gasPrice()} gwei`, { type: 'WATCHING' })
+
+		// Set activity status to current gas price every 60 seconds
+		setInterval(async () => {
+			client.user.setActivity(`Gas Price: ${await gasPrice()} gwei`, { type: 'WATCHING' })
+		}, 60000)
 	},
 }
